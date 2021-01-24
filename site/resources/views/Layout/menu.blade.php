@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top nav-before navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img class="nav-logo" src="images/navlogo.png"></a>
+    <a class="navbar-brand" href="#"><img class="nav-logo" src="images/Shakil Ahmed.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -18,15 +18,15 @@
                 <a class="nav-link nav-font" href="projects.html">প্রোজেক্ট
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link nav-font" href="blog.html">ব্লগ</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link nav-font" href="#">যোগাযোগ</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        {{-- <form class="form-inline my-2 my-lg-0">
             <button class="normal-btn btn">সাইন ইন</button>
-        </form>
+        </form> --}}
     </div>
 </nav>

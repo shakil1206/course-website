@@ -34,3 +34,21 @@ Route::post('/getCoursesDetails','CoursesController@getCoursesDetails');
 Route::post('/coursesDelete','CoursesController@coursesDelete');
 Route::post('/coursesUpdate','CoursesController@coursesUpdate');
 Route::post('/coursesAdd','CoursesController@coursesAdd');
+
+
+
+
+//Admin Panel Project Management
+Route::get('/project',"OurProjectController@ProjectIndex");
+Route::get('/getProjectData',"OurProjectController@GetProjectData");
+Route::post('/projectAdd',"OurProjectController@projectAdd");
+Route::post('/getProjectDetails',"OurProjectController@getProjectDetails");
+Route::post('/projectUpdate',"OurProjectController@projectUpdate");
+Route::post('/projectDelete',"OurProjectController@projectDelete");
+
+
+
+// Admin Panel Contact Management
+Route::get('/contact',"ContactController@ContactIndex");
+Route::get('/getContactData',"ContactController@GetContactData");
+Route::post('/contactDelete',"ContactController@contactDelete");

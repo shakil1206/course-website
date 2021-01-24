@@ -9,6 +9,7 @@
     <meta name="description" content="Shakil Ahmed is an Expert Web Developer in Bangladesh. Expert Web Design in Bangladesh, Expert Programmer in Bangladesh. He is highly talented, experienced, professional and cooperative software engineer, working in programming and web world for more than 2 years. Moreover Shakil Ahmed has a skilled to assure you a wide range of quality IT services. ">
 
     <meta name="keywords" content="Expert Web Developer in Bangladesh, Expert Web Design in Bangladesh, Expert Programmer in Bangladesh">
+    <link rel="shortcut icon" href="{{asset('images/Shakil Ahmed.ico')}}" type="image/x-icon">
 
     <meta name="author" content="Shakil Ahmed">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +30,8 @@
 
 
 
+
+@include('Layout.footer')
 
 <script type="text/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>

@@ -62,6 +62,22 @@
                             <span class="hide-menu">Courses</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ url('/project') }}">
+                            <span>
+                                <i class="fas fa-code"></i>
+                            </span>
+                            <span class="hide-menu">Project</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/contact') }}">
+                            <span>
+                                <i class="far fa-envelope"></i>
+                            </span>
+                            <span class="hide-menu">Contact</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
