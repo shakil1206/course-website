@@ -1,4 +1,5 @@
 @extends('Layout.app')
+@section('title',"Projects")
 
 @section('content')
 <div id="main-div-project" class="container d-none">
@@ -51,7 +52,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add New Course</h5>
+                <h5 class="modal-title">Add New Project</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -300,11 +301,11 @@ else if (project_img.length == 0) {
         if (response.status == 200) {
             if (response.data == 1) {
                 $('#addProjectModal').modal('hide');
-                toastr.success('Service Edit Success');
+                toastr.success('Project Add Success');
                 getProjectData();
             } else {
                 $('#addProjectModal').modal('hide');
-                toastr.error('Edit Fail')
+                toastr.error('Project Add Fail')
                 getProjectData();
             }
         } else {
@@ -416,11 +417,11 @@ else if (project_img.length == 0) {
         if (response.status == 200) {
             if (response.data == 1) {
                 $('#updateProjectModal').modal('hide');
-                toastr.success('Course Update Success');
+                toastr.success('Project Update Success');
                 getProjectData();
             } else {
                 $('#updateProjectModal').modal('hide');
-                toastr.error('Update Fail')
+                toastr.error('Project Update Fail')
                 getProjectData();
             }
         } else {

@@ -1,4 +1,4 @@
-<div class="container-fluid section-marginTop parallax text-center">
+<div id="contact" class="container-fluid section-marginTop parallax text-center">
     <div class="row ">
         <div class="col-md-6 contact-form ">
             <h5 class="help-line-title">
@@ -27,6 +27,5 @@
             <button id="contactSendBtnId" type="submit" class="btn btn-block normal-btn w-100">পাঠিয়ে দিন
             </button>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>

@@ -19,7 +19,7 @@
                 </ul>
                 <ul class="navbar-nav my-lg-0">
                     <li class="nav-item">
-                        <a href="" class="btn btn-sm btn-danger">Logout</a>
+                        <a href="{{ url('/logout') }}" class="btn btn-sm btn-danger">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -76,6 +76,22 @@
                                 <i class="far fa-envelope"></i>
                             </span>
                             <span class="hide-menu">Contact</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/review') }}">
+                            <span>
+                                <i class="far fa-star"></i>
+                            </span>
+                            <span class="hide-menu">Review</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/photo') }}">
+                            <span>
+                                <i class="far fa-images"></i>
+                            </span>
+                            <span class="hide-menu">Photo Gallery</span>
                         </a>
                     </li>
                 </ul>
