@@ -48,27 +48,22 @@
     </div>
 </div>
 
-<div id="gallery" class="container-fluid">
-    <img src="http://127.0.0.1:8001/storage/iIKay7xLdmfgX2Sw7VAHN7w3TvuyNjXSz8Xvnv9h.svg" class="card img-responsive">
-    <img src="http://127.0.0.1:8001/storage/YtXmwkt1kRBbOuZSjai4RkWHmkmYZVGtXwVCOnih.jpeg" class="card img-responsive">
-    <img src="http://127.0.0.1:8001/storage/Rjbzw8oaBW2RA60uwTmBnPDJqgvD4VUpPGdYrDBK.jpeg" class="card img-responsive">
-    <img src="http://127.0.0.1:8001/storage/rbtOUUr4UD8Zrlgktt2gZTeAW6Epqo6JhL2ywyCS.png" class="card img-responsive">
-    <img src="http://127.0.0.1:8001/storage/znHIsQujjTIttcGYfo5f2eWU8lqVvcs21GmBovPO.svg" class="card img-responsive">
-    <img src="http://127.0.0.1:8001/storage/J5rcbmipYKTmiPUSo4447vLarzs5KeVbp25jEu8F.jpeg" class="card img-responsive">
 
-</div>
 
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div class="container-fluid">
+   <div class="row justify-content-center">
+        <div class="card-columns">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-body">
-            </div>
         </div>
+        <button id="loadMoreBtnId" class="btn btn-primary text-center">Load More</button>
+   </div>
 
-    </div>
 </div>
+
+
+
+
+
 
 
 @endsection
@@ -110,6 +105,8 @@
                     $('#savePhoto').html('Save');
                     $('#addPhotosModal').modal('hide');
 
+                $('.card-columns').empty();
+                loadPhoto();
                 } else {
                     toastr.error('Photo Upload Faild');
                     $('#savePhoto').html('Save');
@@ -126,21 +123,151 @@
 
 
 
-    $(document).ready(function () {
-        $("img").click(function () {
-            var t = $(this).attr("src");
-            $(".modal-body").html("<img src='" + t + "' class='modal-img'>");
-            $("#myModal").modal();
-        });
+    // $(document).ready(function () {
+    //     $("img").click(function () {
+    //         var t = $(this).attr("src");
+    //         $(".modal-body").html("<img src='" + t + "' class='modal-img'>");
+    //         $("#myModal").modal();
+    //     });
 
-        $("video").click(function () {
-            var v = $("video > source");
-            var t = v.attr("src");
-            $(".modal-body").html("<video class='model-vid' controls><source src='" + t +
-                "' type='video/mp4'></source></video>");
-            $("#myModal").modal();
-        });
-    }); //EOF Document.ready
+    //     $("video").click(function () {
+    //         var v = $("video > source");
+    //         var t = v.attr("src");
+    //         $(".modal-body").html("<video class='model-vid' controls><source src='" + t +
+    //             "' type='video/mp4'></source></video>");
+    //         $("#myModal").modal();
+    //     });
+    // });
+    //EOF Document.ready
+
+
+    loadPhoto();
+
+
+    function loadPhoto(){
+
+        axios.get('/photoJson')
+        .then(function(response){
+            // console.log(response.data);
+
+            $.each(response.data, function (i, item) {
+                    $('<div class="card">').html(
+                        `<img data-id="${item['id']}" src="${item['location']}" class="card-img-top" alt="Image Name"><button data-id="${item['id']}" data-photo="${item['location']}" class="btn image-delete-btn btn-sm"><i class="fas fa-trash-alt"></i></button>`
+                    ).appendTo('.card-columns');
+                })
+
+
+
+                $('.image-delete-btn').on('click',function(event){
+                    event.preventDefault();
+
+                    let id = $(this).data('id');
+                    let photo = $(this).data('photo');
+
+                    photoDelete(id, photo);
+                })
+
+
+        }).catch(function(error){
+
+        })
+
+
+
+    }
+
+
+    let ImgId=0;
+    function loadById(firstImageId, loadMoreBtn){
+
+        ImgId = ImgId + 2;
+
+        let LastImageId = firstImageId + ImgId;
+
+        loadMoreBtn.html(`<div class="spinner-border spinner-border-sm" role="status"></div>`);
+
+
+        let url = '/photoJsonById/'+LastImageId;
+        // alert(url);
+
+
+        axios.get(url)
+        .then(function(response){
+            // console.log(response.data);
+
+            $.each(response.data, function (i, item) {
+                    $('<div class="card">').html(
+                        `<img data-id="${item['id']}" src="${item['location']}" class="card-img-top" alt="Image Name"><button data-id="${item['id']}" data-photo="${item['location']}" class="btn image-delete-btn btn-sm"><i class="fas fa-trash-alt"></i></button>`
+                    ).appendTo('.card-columns');
+                })
+
+
+                loadMoreBtn.html(`Load More`);
+
+
+                $('.image-delete-btn').on('click',function(event){
+                    event.preventDefault();
+
+                    let id = $(this).data('id');
+                    let photo = $(this).data('photo');
+
+                    // alert(id+photo)
+                    photoDelete(id, photo);
+                })
+
+
+
+
+
+        }).catch(function(error){
+
+        })
+
+
+
+    }
+
+
+    $("#loadMoreBtnId").on('click',function(){
+        let loadMoreBtn = $(this);
+        var firstImageId = $(this).closest('div').find('img').data('id');
+        loadById(firstImageId,loadMoreBtn );
+    })
+
+
+
+
+
+    function photoDelete(id, photo){
+
+        let url = '/photoDelete';
+        let myFormData = new FormData();
+        myFormData.append('OldPhotoUrl',photo);
+        myFormData.append('id',id);
+
+        axios.post(url, myFormData).then(function(response){
+
+            if(response.status==200 && response.data==1){
+                toastr.success('Photo Delete Success!');
+                // $('.card-columns').empty();
+                // loadPhoto();
+                window.location.href='/photo';
+                ImgId=0;
+
+            }else{
+                toastr.error('Photo delete Faild');
+
+            }
+
+        }).catch(function(error){
+                toastr.error('Photo delete Faild');
+
+        })
+    }
+
+
+
+
 
 </script>
 @endsection

@@ -66,6 +66,12 @@ Route::post('/reviewUpdate',"ReviewController@reviewUpdate")->middleware('loginC
 // Admin Photo Gallery Management
 Route::get('/photo',"PhotoController@photoIndex")->middleware('loginCheck');
 Route::post('/photoUpload',"PhotoController@photoUpload")->middleware('loginCheck');
+Route::get('/photoJson',"PhotoController@photoJson")->middleware('loginCheck');
+Route::get('/photoJsonById/{id}',"PhotoController@photoJsonById")->middleware('loginCheck');
+Route::post('/photoDelete',"PhotoController@photoDelete")->middleware('loginCheck');
+
+
+
 
 
 
